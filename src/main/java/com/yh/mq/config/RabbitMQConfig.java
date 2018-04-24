@@ -66,4 +66,40 @@ public class RabbitMQConfig {
     }
 
     //topic ---------------------------------------------------------------
+
+
+    @Bean
+    public FanoutExchange fanoutExchange() {
+        return new FanoutExchange("fanoutExchange");
+    }
+
+    @Bean
+    public Queue fanoutA() {
+        return new Queue("fanout.A");
+    }
+    @Bean
+    public Queue fanoutB() {
+        return new Queue("fanout.B");
+    }
+    @Bean
+    public Queue fanoutC() {
+        return new Queue("fanout.C");
+    }
+
+    @Bean
+    public Binding bindingExchangeA(Queue fanoutA, FanoutExchange fanoutExchange) {
+        return BindingBuilder.bind(fanoutA).to(fanoutExchange);
+    }
+
+    @Bean
+    public Binding bindingExchangeB(Queue fanoutB, FanoutExchange fanoutExchange) {
+        return BindingBuilder.bind(fanoutB).to(fanoutExchange);
+    }
+
+    @Bean
+    public Binding bindingExchangeC(Queue fanoutC, FanoutExchange fanoutExchange) {
+        return BindingBuilder.bind(fanoutC).to(fanoutExchange);
+    }
+
+
 }
